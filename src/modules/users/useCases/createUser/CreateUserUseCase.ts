@@ -7,10 +7,10 @@ import { IUsersRepository } from "../../repositories/IUsersRepository";
 import { ICreateUserDTO } from "./ICreateUserDTO";
 import { User } from "../../entities/User";
 
-// @injectable()
+@injectable()
 export class CreateUserUseCase {
   constructor(
-    // @inject('UsersRepository')
+    @inject('UsersRepository')
     private usersRepository: IUsersRepository
   ) {}
 
