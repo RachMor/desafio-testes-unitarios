@@ -12,4 +12,10 @@ export namespace CreateStatementError {
       super('Insufficient funds', 400);
     }
   }
+
+  export class EqualUser extends AppError {
+    constructor() {
+      super('Unable to transfer to yourself in the same account', 400);
+    }
+  }
 }

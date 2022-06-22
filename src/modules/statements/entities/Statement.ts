@@ -2,6 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  IsNull,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn
@@ -13,6 +14,7 @@ import { User } from '../../users/entities/User';
 enum OperationType {
   DEPOSIT = 'deposit',
   WITHDRAW = 'withdraw',
+  TRANSFER = 'transfer'
 }
 
 @Entity('statements')
@@ -24,11 +26,15 @@ export class Statement {
   user_id: string;
 
   @ManyToOne(() => User, user => user.statement)
-  @JoinColumn({ name: 'user_id' })
+  @JoinColumn([{ name: 'user_id', referencedColumnName: 'id' },
+  { name: 'sender_id', referencedColumnName: 'id' }])
   user: User;
 
   @Column()
   description: string;
+
+  @Column('uuid', {default: null})
+  sender_id?: string;
 
   @Column('decimal', { precision: 5, scale: 2 })
   amount: number;
